@@ -1,5 +1,5 @@
 <template>
-  <div class="project">
+  <div class="project" :class="{ done: project.complete }">
     <div class="actions">
       <h3 @click="showDetails = !showDetails">{{ project.title }}</h3>
       <div class="icons">
@@ -9,7 +9,7 @@
         <span class="material-symbols-outlined" @click="deleteProject">
           delete
         </span>
-        <span class="material-symbols-outlined" @click="doneProject">
+        <span class="material-symbols-outlined tick" @click="doneProject">
           check
         </span>
       </div>
@@ -28,25 +28,34 @@
     data() {
       return {
         showDetails: false,
-       
+        uri: 'http://localhost:3000/projects/' + this.project.id,
       }
     },
     methods: {
-      editPrjocet() {
-        this.$emit('edit', this.project.id)
+      deleteProject() {
+        fetch(this.uri, { method: 'DELETE' })
+          .then(() => {
+            this.$emit('del', this.project.id)
+          })
+          .catch((err) => console.log(err))
       },
       doneProject() {
-        this.$emit('done', this.project.id)
+        fetch(this.uri, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ complete: !this.project.complete }),
+        })
+          .then(() => {
+            this.$emit('done', this.project.id)
+          })
+          .catch((err) => console.log(err))
       },
-      deleteProject() {
-       
-        this.$emit('del', this.project.id)
-      },
+      editPrjocet() {},
     },
   }
 </script>
- 
-<style>
+
+<style scoped>
   .project {
     margin: 20px auto;
     background: white;
@@ -58,6 +67,7 @@
   h3 {
     cursor: pointer;
   }
+
   .actions {
     display: flex;
     justify-content: space-between;
@@ -71,5 +81,11 @@
   }
   .material-symbols-outlined:hover {
     color: rgb(99, 99, 99);
+  }
+  .project.done {
+    border-left: 4px solid green;
+  }
+  .project.done .tick {
+    color: green;
   }
 </style>

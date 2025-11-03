@@ -4,42 +4,31 @@
     data() {
       return {
         projects: [],
-        uri: 'http://localhost:3000/projects',
+        uri: 'http://localhost:3000/projects/',
       }
     },
     components: {
       SingleProject,
     },
     mounted() {
-      fetch('http://localhost:3000/projects')
+      fetch(this.uri)
         .then((res) => res.json())
         .then((data) => (this.projects = data))
         .catch((error) => console.log(error.message))
     },
     methods: {
-      changeDoneStatus(e) {
-        console.log('e in compelete', e)
-        fetch(uri, { method: 'PUT' })
-          .then(() => {
-            const compPrj = this.projects.filter((project) => project.id == e)
-            compPrj.complete = !compPrj.complete
-            console.log('completed project:', compPrj)
-          })
-          .catch((err) => console.log(err))
+      handleDelete(id) {
+        this.projects = this.projects.filter((p) => {
+          return p.id !== id
+        })
       },
-      handleDelete(e) {
-        console.log('e in delete', e)
-        const uri = `${this.uri}/${e}`
-        fetch(uri, { method: 'DELETE' })
-          .then(() => {
-            this.projects = this.projects.filter((project) => project.id !== e)
-          })
-          .catch((err) => console.log(err))
+      changeDoneStatus(id) {
+        let p = this.projects.find((p) => {
+          return p.id == id
+        })
+        p.complete = !p.complete
       },
-      handleEdit(e) {
-        console.log('e in edit', e)
-        const uri = `${this.uri}/${e}`
-      },
+      handleEdit(id) {},
     },
   }
 </script>
