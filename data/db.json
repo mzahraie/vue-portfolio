@@ -2,8 +2,8 @@
   "projects": [
     {
       "id": "1",
-      "title": "Create new homepage banner",
-      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "title": "Create new homepage ban",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna kjsdhfa",
       "complete": true
     },
     {
@@ -16,6 +16,18 @@
       "id": "3",
       "title": "Do dropshipping",
       "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "complete": false
+    },
+    {
+      "id": "9220",
+      "title": "test",
+      "details": "this is a test project that I want to add",
+      "complete": true
+    },
+    {
+      "id": "97be",
+      "title": "do some excersize",
+      "details": "plank, swimming, basketball",
       "complete": false
     }
   ]

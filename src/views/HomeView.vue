@@ -28,7 +28,13 @@
         })
         p.complete = !p.complete
       },
-      handleEdit(id) {},
+      handleEdit(id) {
+         let p = this.projects.find((p) => {
+          return p.id == id
+        })
+       p.title = p.title
+       p.details = p.details
+      },
     },
   }
 </script>

@@ -3,9 +3,9 @@
     <div class="actions">
       <h3 @click="showDetails = !showDetails">{{ project.title }}</h3>
       <div class="icons">
-        <span class="material-symbols-outlined" @click="editPrjocet">
-          edit
-        </span>
+        <router-link :to="{ name: 'edit-project', params: { id: project.id } }">
+          <span class="material-symbols-outlined"> edit </span>
+        </router-link>
         <span class="material-symbols-outlined" @click="deleteProject">
           delete
         </span>
@@ -50,7 +50,6 @@
           })
           .catch((err) => console.log(err))
       },
-      editPrjocet() {},
     },
   }
 </script>
