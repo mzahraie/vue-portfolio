@@ -38,7 +38,6 @@
           }),
         })
           .then(() => {
-            this.$emit('edit', this.project.id)
             this.$router.push({ name: 'home' })
           })
           .catch((err) => console.log(err))

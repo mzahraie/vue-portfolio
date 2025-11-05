@@ -2,13 +2,13 @@
   "projects": [
     {
       "id": "1",
-      "title": "Create new homepage ban",
-      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna kjsdhfa",
+      "title": "Create new homepage again",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna kjsdhfa  asdfga",
       "complete": true
     },
     {
       "id": "2",
-      "title": "Create new Vue 3 project",
+      "title": "Create new Vue 3 project 1",
       "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "complete": true
     },

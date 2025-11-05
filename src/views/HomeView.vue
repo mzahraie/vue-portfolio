@@ -1,5 +1,6 @@
 <script>
   import SingleProject from '@/components/SingleProject.vue'
+  import FilterNav from '@/components/FilterNav.vue'
   export default {
     data() {
       return {
@@ -9,6 +10,7 @@
     },
     components: {
       SingleProject,
+      FilterNav,
     },
     mounted() {
       fetch(this.uri)
@@ -28,25 +30,26 @@
         })
         p.complete = !p.complete
       },
-      handleEdit(id) {
-         let p = this.projects.find((p) => {
-          return p.id == id
-        })
-       p.title = p.title
-       p.details = p.details
+      handleFilter(by) {
+        if (by == 'all')
+          this.projects = fetch(this.uri)
+            .then((res) => res.json())
+            .then((data) => (this.projects = data))
+            .catch((error) => console.log(error.message))
+        this.projects = this.projects.filter((p) => {})
       },
     },
   }
 </script>
 
 <template>
+  <FilterNav @handleFilter="handleFilter" />
   <div v-if="projects.length">
     <div v-for="prj in projects" :key="prj.id">
       <SingleProject
         :project="prj"
         @done="changeDoneStatus"
         @del="handleDelete"
-        @edit="handleEdit"
       />
     </div>
   </div>
