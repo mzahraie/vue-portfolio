@@ -6,6 +6,7 @@
       return {
         projects: [],
         uri: 'http://localhost:3000/projects/',
+        current: 'all',
       }
     },
     components: {
@@ -30,22 +31,23 @@
         })
         p.complete = !p.complete
       },
-      handleFilter(by) {
-        if (by == 'all')
-          this.projects = fetch(this.uri)
-            .then((res) => res.json())
-            .then((data) => (this.projects = data))
-            .catch((error) => console.log(error.message))
-        this.projects = this.projects.filter((p) => {})
+    },
+    computed: {
+      filteredProjects() {
+        if (this.current === 'completed')
+          return this.projects.filter((p) => p.complete)
+        if (this.current === 'ongoing')
+          return this.projects.filter((p) => !p.complete)
+        return this.projects
       },
     },
   }
 </script>
 
 <template>
-  <FilterNav @handleFilter="handleFilter" />
+  <FilterNav @handleFilter="current = $event" :current="current" />
   <div v-if="projects.length">
-    <div v-for="prj in projects" :key="prj.id">
+    <div v-for="prj in filteredProjects" :key="prj.id">
       <SingleProject
         :project="prj"
         @done="changeDoneStatus"
